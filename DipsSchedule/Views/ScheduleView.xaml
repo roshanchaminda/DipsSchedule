@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="DipsSchedule.Views.ScheduleView"
+             xmlns:template="clr-namespace:DipsSchedule.Views"
+             xmlns:converter="clr-namespace:DipsSchedule.Converters"
+             xmlns:local="clr-namespace:DipsSchedule.ViewModels"
+             xmlns:viewModelBase="clr-namespace:DipsSchedule.ViewModels.Base;assembly=DipsSchedule"  
+             viewModelBase:ViewModelLocator.AutoWireViewModel="true"
+             BackgroundColor="{StaticResource PageBackgroundColor}"  >
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
+            <Label Text="{Binding PageTitle}" Style="{StaticResource HeadingLabelStyleWhite}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"/>
+            <Image HorizontalOptions="End" Margin="0">
+                <Image.Source>
+                    <FontImageSource  Glyph="&#xf20e;"
+                         FontFamily="ionicons"
+                         Size="30" />
+                </Image.Source>
+            </Image>
+            <Image HorizontalOptions="End" Margin="10,0,15,0">
+                <Image.Source>
+                    <FontImageSource  Glyph="&#xf1a0;" 
+                         FontFamily="ionicons"
+                         Size="30" />
+                </Image.Source>
+            </Image>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.Resources>
+        <DataTemplate x:Key="dateTemplate">
+
+            <StackLayout Padding="1,8" Orientation="Vertical" Margin="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{Binding DateCellBackgroundColor}" >
+
+                <Label Text="{Binding DateValue,Converter={converter:TodayDateNameConverter}}" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" LineBreakMode="TailTruncation" Style="{StaticResource DetailLabelStyleBlackSmallBold}" TextColor="{Binding DateCellTextColor}" Opacity="0.5" />
+
+                <Label Text="{Binding DateValue, StringFormat='{0:dd}'}" HorizontalTextAlignment="Center" VerticalTextAlignment="Start" HorizontalOptions="FillAndExpand" LineBreakMode="TailTruncation" Style="{StaticResource DetailLabelStyleBlackBold}" TextColor="{Binding DateCellTextColor}" FontSize="18" Margin="0,-10,0,0" Opacity="0.5"  />
+
+                <Label Text="{Binding DateValue,Converter={converter:TodayMonthNameConverter}}" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" LineBreakMode="TailTruncation" Style="{StaticResource DetailLabelStyleBlack}" TextColor="{Binding DateCellTextColor}" IsVisible="{Binding IsSelectedCell}" Margin="0,-10,0,0" Opacity="0.5"  />
+
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding DaySelectCommand,Source={RelativeSource AncestorType={x:Type local:ScheduleViewModel}}}" CommandParameter="{Binding DateCellIndex}"  />
+                </StackLayout.GestureRecognizers>
+
+            </StackLayout>
+
+        </DataTemplate>
+
+        <DataTemplate x:Key="scheduleTemplate">
+            <StackLayout Padding="0" Margin="0,0,0,15">
+                <Frame CornerRadius="15" HasShadow="False" BackgroundColor="{Binding UserStatus,Converter={converter:SheduleBackgroundColorConverter}}" Padding="0,0,0,-10"   >
+                    <StackLayout Orientation="Vertical" >
+                        <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="15,10,15,2" >
+                            <Label Text="{Binding ScheduleTime}" HorizontalTextAlignment="Start" HorizontalOptions="StartAndExpand" LineBreakMode="TailTruncation" Style="{StaticResource DetailLabelStyleBlackBold}"  />
+                            <Label Text="{Binding UserStatus,Converter={converter:ScheduleNameConverter}}" HorizontalTextAlignment="End" HorizontalOptions="End" LineBreakMode="TailTruncation" Style="{StaticResource DetailLabelStyleBlack}" TextColor="{Binding UserStatus,Converter={converter:ScheduleUserStatusTextColorConverter}}"   />
+                        </StackLayout>
+                        <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" BackgroundColor="Gray" Opacity="0.2" Margin="15,0" ></BoxView>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,-5,0,5" Padding="0" BackgroundColor="White" >
+                            <StackLayout HorizontalOptions="FillAndExpand">
+                                <template:UserBasicInfoView BindingContext="{Binding UserInfo}"   />
+                                <Label Text="{Binding ReferenceDetail}" Style="{StaticResource DetailLabelStyleBlackBold}" Padding="15,0,10,2" Margin="0,0,0,5" ></Label>
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ScheduleSelectCommand,Source={RelativeSource AncestorType={x:Type local:ScheduleViewModel}}}" CommandParameter="{Binding ScheduleId}" />
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                            <StackLayout Orientation="Vertical" HorizontalOptions="End" VerticalOptions="Center">
+
+                                <Image HorizontalOptions="End" Margin="10,0,15,0" >
+                                    <Image.Source>
+                                        <FontImageSource  Glyph="&#xf1a0;"
+                                    FontFamily="ionicons" Size="30" Color="{StaticResource PrimaryColor}" />
+                                    </Image.Source>
+                                </Image>
+
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </DataTemplate>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Orientation="Vertical" BackgroundColor="{StaticResource PageBodyViewBackgroundColor}" >
+                <StackLayout Orientation="Vertical" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
+                    <Label Text="PETER STEVENS SCHEDULES" Style="{StaticResource HeadingLabelStyleBlack}" HorizontalOptions="Center" HorizontalTextAlignment="Center" Margin="0,15"></Label>
+
+
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                        <CarouselView ItemsSource="{Binding ScheduleItems}" IndicatorView="indicatorView" >
+                            <CarouselView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal"  SnapPointsType="MandatorySingle"
+                           SnapPointsAlignment="Start" />
+                            </CarouselView.ItemsLayout>
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout>
+                                        <Frame HasShadow="False" BackgroundColor="{StaticResource ScheduleViewBackgroundColor}" 
+                                            CornerRadius="15" Margin="15,0" Padding="5" HeightRequest="600" HorizontalOptions="FillAndExpand"
+                                            VerticalOptions="CenterAndExpand">
+                                            <ScrollView>
+                                                <StackLayout BindableLayout.ItemsSource="{Binding}" BindableLayout.ItemTemplate="{StaticResource scheduleTemplate}" Orientation="Vertical" Margin="0">
+                                                </StackLayout>
+                                            </ScrollView>
+                                        </Frame>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+                        </CarouselView>
+
+                    </StackLayout>
+
+                </StackLayout>
+                <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" >
+                    <IndicatorView x:Name="indicatorView"
+                       IndicatorsShape="Circle"
+                       IndicatorColor="LightGray"
+                       SelectedIndicatorColor="{StaticResource PrimaryColor}"
+                       Margin="10" />
+                </StackLayout>
+                <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" >
+                    <!--<template:ScheduleWeekView />-->
+                    <StackLayout BindableLayout.ItemsSource="{Binding WeekDaysView}" BindableLayout.ItemTemplate="{StaticResource dateTemplate}" Orientation="Horizontal" Margin="0">
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

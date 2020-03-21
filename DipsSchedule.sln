@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DipsSchedule.UITests", "Dip
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DipsSchedule", "DipsSchedule\DipsSchedule.csproj", "{4303CE86-18A8-4C37-A305-5CA66BA46618}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3C879D62-0F45-4F09-82F1-E3A5959F0ABA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DipsSchedule.UnitTests", "DipsSchedule.UnitTests\DipsSchedule.UnitTests.csproj", "{904E71C1-4D20-49B5-BDCE-6072A1ABDC71}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,5 +71,20 @@ Global
 		{4303CE86-18A8-4C37-A305-5CA66BA46618}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{4303CE86-18A8-4C37-A305-5CA66BA46618}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{4303CE86-18A8-4C37-A305-5CA66BA46618}.Release|iPhone.Build.0 = Release|Any CPU
+		{904E71C1-4D20-49B5-BDCE-6072A1ABDC71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{904E71C1-4D20-49B5-BDCE-6072A1ABDC71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{904E71C1-4D20-49B5-BDCE-6072A1ABDC71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{904E71C1-4D20-49B5-BDCE-6072A1ABDC71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{904E71C1-4D20-49B5-BDCE-6072A1ABDC71}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{904E71C1-4D20-49B5-BDCE-6072A1ABDC71}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{904E71C1-4D20-49B5-BDCE-6072A1ABDC71}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{904E71C1-4D20-49B5-BDCE-6072A1ABDC71}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{904E71C1-4D20-49B5-BDCE-6072A1ABDC71}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{904E71C1-4D20-49B5-BDCE-6072A1ABDC71}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{904E71C1-4D20-49B5-BDCE-6072A1ABDC71}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{904E71C1-4D20-49B5-BDCE-6072A1ABDC71}.Release|iPhone.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{904E71C1-4D20-49B5-BDCE-6072A1ABDC71} = {3C879D62-0F45-4F09-82F1-E3A5959F0ABA}
 	EndGlobalSection
 EndGlobal

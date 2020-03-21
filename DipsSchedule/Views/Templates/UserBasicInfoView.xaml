@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="DipsSchedule.Views.UserBasicInfoView"
+             xmlns:viewModelBase="clr-namespace:DipsSchedule.ViewModels.Base;assembly=DipsSchedule"  
+             viewModelBase:ViewModelLocator.AutoWireViewModel="true" >
+    <ContentView.Content>
+        <StackLayout Padding="0" Orientation="Vertical" Margin="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+            <Label LineBreakMode="TailTruncation" Padding="15,0,0,2">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{Binding Surname}" Style="{StaticResource HeadingLabelStyleBlack}" ></Span>
+                        <Span Text=", "></Span>
+                        <Span Text="{Binding FirstName}" Style="{StaticResource SubHeadingLabelStyleBlack}"></Span>
+                        <Span Text=" "></Span>
+                        <Span Text="{Binding LastName}" Style="{StaticResource SubHeadingLabelStyleBlack}" ></Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label LineBreakMode="TailTruncation" Padding="15,0,0,2" Margin="0,-10,0,-3" Opacity="0.5">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{Binding ReferenceNumber}" Style="{StaticResource DetailLabelStyleBlackBold}" ></Span>
+                        <Span Text=" - "></Span>
+                        <Span Text="{Binding PatientSince}" Style="{StaticResource DetailLabelStyleBlack}"></Span>
+                        <Span Text=" - "></Span>
+                        <Span Text="{Binding Gender}" Style="{StaticResource DetailLabelStyleBlack}" ></Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>
