@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using DipsSchedule.Helpers;
 using Xamarin.Forms.Internals;
+using System.Windows.Input;
 
 namespace DipsSchedule.ViewModels
 {
@@ -25,7 +26,7 @@ namespace DipsSchedule.ViewModels
 
         private ObservableCollection<DateCellViewModel> weekDaysView;
 
-        private ObservableCollection<Grouping<ScheduleCategory, ScheduleItemViewModel>> scheduleItems;
+        private ObservableCollection<Helpers.Grouping<ScheduleCategory, ScheduleItemViewModel>> scheduleItems;
 
         public ScheduleViewModel(IScheduleService scheduleService, INavigationService navigationService)
         {
@@ -43,9 +44,9 @@ namespace DipsSchedule.ViewModels
 
             DaySelectCommand = new Command(ExecuteDaySelectCommand, (x) => !IsBusy);
 
-            ScheduleSelectCommand = new Command(ExecuteScheduleSelectCommand, (x) => !IsBusy);
-        }
+            ScheduleSelectCommand = new Command<int>(async (x) => await ExecuteScheduleSelectCommand(x));
 
+        }
 
         public int CurrentIndex
         {
@@ -71,7 +72,7 @@ namespace DipsSchedule.ViewModels
 
         public IList<ScheduleItemViewModel> SheduleList { get; set; }
 
-        public ObservableCollection<Grouping<ScheduleCategory, ScheduleItemViewModel>> ScheduleItems
+        public ObservableCollection<Helpers.Grouping<ScheduleCategory, ScheduleItemViewModel>> ScheduleItems
         {
             get { return scheduleItems; }
             set
@@ -83,7 +84,7 @@ namespace DipsSchedule.ViewModels
 
         public Command DaySelectCommand { get; }
 
-        public Command ScheduleSelectCommand { get; }
+        public ICommand ScheduleSelectCommand { get; }
 
         public override async Task<bool> InitializeAsync(object navigationData)
         {
@@ -113,19 +114,22 @@ namespace DipsSchedule.ViewModels
         {
             var filterList = SheduleList.Where(d => d.ScheduleDate.Date == SelectedDate.Date).OrderBy(item => item.ScheduleDate)
                                                 .GroupBy(item => item.Category)
-                                                .Select(itemGroup => new Grouping<ScheduleCategory, ScheduleItemViewModel>(itemGroup.Key, itemGroup));
+                                                .Select(itemGroup => new Helpers.Grouping<ScheduleCategory, ScheduleItemViewModel>(itemGroup.Key, itemGroup));
 
-            ScheduleItems = new ObservableCollection<Grouping<ScheduleCategory, ScheduleItemViewModel>>(filterList);
+            ScheduleItems = new ObservableCollection<Helpers.Grouping<ScheduleCategory, ScheduleItemViewModel>>(filterList);
         }
 
-        private async void ExecuteScheduleSelectCommand(object selectedIndex)
+        private async Task ExecuteScheduleSelectCommand(int selectedIndex)
         {
-            IsBusy = true;
-
-            int scheduleId = Convert.ToInt32(selectedIndex);
-            await _navigationService.NavigateToAsync<ScheduleDetailViewModel>(scheduleId);
-
-            IsBusy = false;
+            try
+            {
+                IsBusy = true;
+                await _navigationService.NavigateToAsync<ScheduleDetailViewModel>(selectedIndex);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
 
         private async Task LoadSchedules()
@@ -144,6 +148,11 @@ namespace DipsSchedule.ViewModels
             List<DateCellViewModel> weekDataList = await _scheduleService.GetCurrentWeekData();
 
             weekDataList.ForEach(WeekDaysView.Add);
+        }
+
+        private bool CanExecuteSubmit(int a)
+        {
+            return !IsBusy;
         }
     }
 }

@@ -42,6 +42,7 @@ namespace DipsSchedule.ViewModels.Base
             _container.Register<INavigationService, NavigationService>();
             _container.Register<IScheduleService, ScheduleService>();
             _container.Register<IScheduleDataStore, ScheduleDataStore>();
+            _container.Register<IDateTimeProvider, DateTimeProvider>();
         }
 
         private static void OnAutoWireViewModelChanged(BindableObject bindable, object oldValue, object newValue)

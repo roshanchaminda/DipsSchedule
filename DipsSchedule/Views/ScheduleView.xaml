@@ -46,14 +46,14 @@
 
         <DataTemplate x:Key="scheduleTemplate">
             <StackLayout Padding="0" Margin="0,0,0,15">
-                <Frame CornerRadius="15" HasShadow="False" BackgroundColor="{Binding UserStatus,Converter={converter:SheduleBackgroundColorConverter}}" Padding="0,0,0,-10"   >
+                <Frame CornerRadius="15" HasShadow="False" BackgroundColor="{Binding UserStatus,Converter={converter:SheduleBackgroundColorConverter}}" Padding="0"   >
                     <StackLayout Orientation="Vertical" >
                         <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="15,10,15,2" >
                             <Label Text="{Binding ScheduleTime}" HorizontalTextAlignment="Start" HorizontalOptions="StartAndExpand" LineBreakMode="TailTruncation" Style="{StaticResource DetailLabelStyleBlackBold}"  />
                             <Label Text="{Binding UserStatus,Converter={converter:ScheduleNameConverter}}" HorizontalTextAlignment="End" HorizontalOptions="End" LineBreakMode="TailTruncation" Style="{StaticResource DetailLabelStyleBlack}" TextColor="{Binding UserStatus,Converter={converter:ScheduleUserStatusTextColorConverter}}"   />
                         </StackLayout>
                         <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" BackgroundColor="Gray" Opacity="0.2" Margin="15,0" ></BoxView>
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,-5,0,5" Padding="0" BackgroundColor="White" >
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0,-5,0,0" Padding="0" BackgroundColor="White" >
                             <StackLayout HorizontalOptions="FillAndExpand">
                                 <template:UserBasicInfoView BindingContext="{Binding UserInfo}"   />
                                 <Label Text="{Binding ReferenceDetail}" Style="{StaticResource DetailLabelStyleBlackBold}" Padding="15,0,10,2" Margin="0,0,0,5" ></Label>

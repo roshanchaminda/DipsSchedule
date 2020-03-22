@@ -15,6 +15,9 @@ namespace DipsSchedule.Views
         public CustomNavigationView(Page root) : base(root)
         {
             InitializeComponent();
+
+            this.BarTextColor = Color.White;
+            this.BarBackgroundColor = Color.FromHex("147e88");
         }
     }
 }

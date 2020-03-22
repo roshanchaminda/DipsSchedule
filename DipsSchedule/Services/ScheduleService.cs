@@ -15,11 +15,14 @@ namespace DipsSchedule.Services
 
         private const int loopEndValue = 4;
 
-        private IScheduleDataStore _sheduleDataStore;
+        private readonly IScheduleDataStore _sheduleDataStore;
 
-        public ScheduleService(IScheduleDataStore sheduleDataStore)
+        private readonly IDateTimeProvider _dateTimeProvider;
+
+        public ScheduleService(IScheduleDataStore sheduleDataStore, IDateTimeProvider dateTimeProvider)
         {
             _sheduleDataStore = sheduleDataStore;
+            _dateTimeProvider = dateTimeProvider;
         }
 
         public async Task<List<ScheduleItemViewModel>> GetAllSchedules()
@@ -28,11 +31,14 @@ namespace DipsSchedule.Services
 
             List<ScheduleItemViewModel> scheduleItemList = new List<ScheduleItemViewModel>();
 
-            foreach (ScheduleDetail detail in scheduleDetailList.ToList())
+            if (scheduleDetailList != null)
             {
-                ScheduleItemViewModel scheduleItemViewModel = AddScheduleItem(detail);
+                foreach (ScheduleDetail detail in scheduleDetailList.ToList())
+                {
+                    ScheduleItemViewModel scheduleItemViewModel = AddScheduleItem(detail);
 
-                scheduleItemList.Add(scheduleItemViewModel);
+                    scheduleItemList.Add(scheduleItemViewModel);
+                }
             }
 
             return scheduleItemList;
@@ -54,7 +60,7 @@ namespace DipsSchedule.Services
             for (int i = loopStartValue; i < loopEndValue; i++)
             {
                 DateCellViewModel dateCell = new DateCellViewModel();
-                dateCell.DateValue = DateTime.Now.AddDays(i);
+                dateCell.DateValue = _dateTimeProvider.Now.AddDays(i);
                 dateCell.IsSelectedCell = i == 0 ? true : false;
                 dateCell.DateCellIndex = i + loopStartValue * -1;
 
