@@ -9,11 +9,6 @@ namespace DipsSchedule.ViewModels
 {
     public class ScheduleItemViewModel : ViewModelBase
     {
-        public ScheduleItemViewModel()
-        {
-
-        }
-
         public UserBasicInfoViewModel UserInfo { get; set; }
 
         public int ScheduleId { get; set; }

@@ -44,7 +44,7 @@ namespace DipsSchedule.ViewModels
 
             DaySelectCommand = new Command(ExecuteDaySelectCommand, (x) => !IsBusy);
 
-            ScheduleSelectCommand = new Command<int>(async (x) => await ExecuteScheduleSelectCommand(x));
+            ScheduleSelectCommand = new Command<int>(async (x) => await ExecuteScheduleSelectCommand(x), (x) => !IsBusy);
 
         }
 
@@ -148,11 +148,6 @@ namespace DipsSchedule.ViewModels
             List<DateCellViewModel> weekDataList = await _scheduleService.GetCurrentWeekData();
 
             weekDataList.ForEach(WeekDaysView.Add);
-        }
-
-        private bool CanExecuteSubmit(int a)
-        {
-            return !IsBusy;
         }
     }
 }

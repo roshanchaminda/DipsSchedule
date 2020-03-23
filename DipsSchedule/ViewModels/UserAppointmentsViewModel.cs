@@ -5,10 +5,6 @@ namespace DipsSchedule.ViewModels
 {
     public class UserAppointmentsViewModel : ViewModelBase
     {
-        public UserAppointmentsViewModel()
-        {
-        }
-
         public int AppointmentId { get; set; }
 
         public string DepartmentName { get; set; }

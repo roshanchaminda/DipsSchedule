@@ -9,7 +9,6 @@ namespace DipsSchedule.Converters
 {
     public class ScheduleNameConverter : IMarkupExtension, IValueConverter
     {
-
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             ScheduleUserStatus userStatus = (ScheduleUserStatus)value;

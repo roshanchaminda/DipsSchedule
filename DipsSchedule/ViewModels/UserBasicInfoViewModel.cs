@@ -6,10 +6,6 @@ namespace DipsSchedule.ViewModels
 {
     public class UserBasicInfoViewModel : ViewModelBase
     {
-        public UserBasicInfoViewModel()
-        {
-        }
-
         public int UserId { get; set; }
 
         public string Surname { get; set; }

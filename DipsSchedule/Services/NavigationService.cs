@@ -11,10 +11,6 @@ namespace DipsSchedule.Services
 {
     public class NavigationService : INavigationService
     {
-        public NavigationService()
-        {
-        }
-
         public Task InitializeAsync()
         {
             return NavigateToAsync<ScheduleViewModel>();

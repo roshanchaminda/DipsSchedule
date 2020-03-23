@@ -5,9 +5,7 @@ using System.Threading.Tasks;
 using DipsSchedule.Enums;
 using DipsSchedule.Models;
 using DipsSchedule.Services;
-using DipsSchedule.UnitTests.Mocks.Services;
 using DipsSchedule.ViewModels;
-using DipsSchedule.ViewModels.Base;
 using Moq;
 using Xunit;
 
@@ -131,7 +129,7 @@ namespace DipsSchedule.UnitTests.ViewModel
             }
         };
 
-        public static List<ScheduleDetail> ScheduleDetails = new List<ScheduleDetail>()
+        private static List<ScheduleDetail> ScheduleDetails = new List<ScheduleDetail>()
         {
             new ScheduleDetail
             {
@@ -172,8 +170,6 @@ namespace DipsSchedule.UnitTests.ViewModel
                 UserAppointments=UserAppointments.Where(w=>w.UserId==Users[0].UserId).ToList()
             }
         };
-
-
 
         private static ScheduleItemViewModel AddScheduleItem(ScheduleDetail detail)
         {

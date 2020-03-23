@@ -16,8 +16,6 @@
 
   <ItemGroup>
     <Folder Include="Services\" />
-    <Folder Include="Mocks\" />
-    <Folder Include="Mocks\Services\" />
     <Folder Include="ViewModel\" />
   </ItemGroup>
   <ItemGroup>

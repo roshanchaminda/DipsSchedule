@@ -6,11 +6,6 @@ namespace DipsSchedule.Models
 {
     public class ScheduleDetail
     {
-        public ScheduleDetail()
-        {
-
-        }
-
         public int ScheduleDetailId { get; set; }
 
         public DateTime ScheduleDate { get; set; }

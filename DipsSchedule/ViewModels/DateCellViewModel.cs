@@ -20,11 +20,6 @@ namespace DipsSchedule.ViewModels
 
         private bool isselectedCell;
 
-        public DateCellViewModel()
-        {
-
-        }
-
         public DateTime DateValue { get; set; }
 
         public int DateCellIndex { get; set; }
